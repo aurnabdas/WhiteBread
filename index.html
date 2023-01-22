@@ -1,4 +1,60 @@
-<canvas></canvas> <!-- element is used to draw graphics, on the fly, via JavaScript.-->
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>  <!-- note you always want this on every site you make to make sure that your padding does not mess up any of you elements-->
+
+<body>
+    <!-- red container dix-->
+    <div style="position: relative; display: inline-block;"> 
+        <!-- we need a inline-block to make sure the health bar does not go past the width of the canvas-->
+
+        <!-- smaller red container dic-->
+        <div style="position: absolute; display: flex; width: 100%; align-items: center; padding:20px ;"> 
+            <!-- display:flex puts childern divs and puts them side by side -->
+            <!-- you can only use align-items if your display is a flex. also align item centers vertically-->
+            <!-- the padding is to create that create space on the sides of the health bar, only problem is that is shifts the whole health bar to right side. the fix is the css up top: box-sizing: border-box-->
+
+            <!-- player health -->
+            <div style="position: relative; height: 30px; width: 100%; display: flex; justify-content: flex-end;">
+                 <!-- this div serves as a parents div for enemy attacks. we are doing this so the health bar does not affect the timer bar position. so this serves to section off the enemy health bar -->
+                 <!-- display: flex is used to display the health correctly -->
+
+                <div style="background-color: yellow; height: 30px; width: 100%; " ></div>
+                <!-- this serves for visual repersentaion to show what the full health is vs how much health is left-->
+                
+                <div id="playerHealth" style="position: absolute; background: blue; top: 0; bottom: 0; right: 0; width: 100%;"> </div>
+                <!-- this div is what will actually decrease-->
+                <!-- the top, bottom right left serves to create the dimensions based on the size of the parent div. change the dimenstions to see how that works-->
+            </div>
 
 
-<script src="index.js"></script>
+            <!-- the timer -->
+            <div id="timer" style= "background-color: red; height: 100px; width: 100px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;"> 10 </div> 
+            <!-- so when we changed the width of the divs for leath to 100% that in turn affected the dimensions of the timer. in order to change it back to the original dimensions write: flex-shrink: 0-->
+            <!-- display and align item centers the timer vertically-->
+
+
+
+            <!-- enemy health -->
+            <div style="position: relative; height: 30px; width: 100%;"> <!-- this div serves as a parents div for enemy attacks. we are doing this so the health bar does not affect the timer bar position. so this serves to section off the enemy health bar -->
+                <div style="background-color: yellow; height: 30px; " ></div>
+                <!-- this serves for visual repersentaion to show what the full health is vs how much health is left-->
+                
+                <div id="enemyHealth" style="position: absolute; background: blue; top: 0; bottom: 0; right: 0; left: 0;"> </div>
+                <!-- this div is what will actually decrease-->
+                <!-- the top, bottom right left serves to create the dimensions based on the size of the parent div. change the dimenstions to see how that works-->
+            </div>
+            <div></div>
+        </div>
+
+    <div id="displayText" style="position: absolute; color: white;  align-items: center; justify-content: center; top: 0; bottom: 0; right: 0; left: 0; display: none; "> Tie</div>
+    <canvas></canvas> <!-- element is used to draw graphics, on the fly, via JavaScript.-->
+    </div>
+
+    <script src="js/util.js"></script>
+    <script src="js/class.js"></script>
+    <script src="index.js"></script>
+</body>
