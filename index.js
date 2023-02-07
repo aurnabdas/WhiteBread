@@ -17,15 +17,19 @@ c.fillRect(0, 0, canvas.width, canvas.height) // (in total there are four argume
 const gravity = 0.8
 
 const background = new Sprite({
-    position: { x:0, y:0 },
-    imageSrc: './img/madgurl.png' 
+    position: { x: 0, y: 0 },
+    imageSrc: './img/madgurl.png'
 
 })
 
 const player = new Fighter({
     position: { x: 0, y: 0 },
     velocity: { x: 0, y: 0 },
-    offset: { x: 0, y: 0 } // don't need to change player's attackbox since it's fine as it is
+    offset: { x: 0, y: 0 }, // don't need to change player's attackbox since it's fine as it is
+    imageSrc: './img/Sprites/Idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset: { x: 215, y: 157 }
 })
 
 const enemy = new Fighter({
@@ -66,8 +70,7 @@ decreaseTimer()
 
 
 
-function animate() 
-{
+function animate() {
     window.requestAnimationFrame(animate) // this creates a infinte loops, hence it creates a animation
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height) //this wont draw anything when we call it. this remove the paint like effect 
@@ -97,7 +100,7 @@ function animate()
 
     {
         player.isAttacking = false // only lets you attack once if you pressed space once 
-        enemy.health-=20 // this decreases the enemies health 
+        enemy.health -= 20 // this decreases the enemies health 
         document.querySelector('#enemyHealth').style.width = enemy.health + "%" // this represents it on the health bar
 
     }
@@ -106,15 +109,14 @@ function animate()
 
     {
         enemy.isAttacking = false // only lets you attack once if you pressed space once 
-        player.health-=20 // this decreases the players health 
+        player.health -= 20 // this decreases the players health 
         document.querySelector('#playerHealth').style.width = player.health + "%" // this represents the players health on the bar
 
     }
 
     //endgame based on health 
-    if(enemy.health<=0 || player.health<= 0)
-    {
-        determineWinner({player,enemy, timerId})
+    if (enemy.health <= 0 || player.health <= 0) {
+        determineWinner({ player, enemy, timerId })
     }
 }
 
