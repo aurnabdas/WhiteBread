@@ -30,7 +30,7 @@ const player = new Fighter({
     framesMax: 8,
     scale: 2.5,
     offset: { x: 215, y: 157 },
-    sprites: { idle: { imageSrc: './img/Sprites/Idle.png', framesMax: 8 }, run: { imageSrc: './img/Sprites/Run.png', framesMax: 8 } }
+    sprites: { idle: { imageSrc: './img/Sprites/Idle.png', framesMax: 8 }, run: { imageSrc: './img/Sprites/Run.png', framesMax: 8 }, jump: { imageSrc: './img/Sprites/Jump.png', framesMax: 2 }, fall: { imageSrc: './img/Sprites/Fall.png', framesMax: 2 } }
 })
 
 const enemy = new Fighter({
@@ -82,15 +82,22 @@ function animate() {
     player.velocity.x = 0
     enemy.velocity.x = 0
         //player movement
-    player.image = player.sprites.idle.image
+    player.switchSprite('idle') // keeps the default animation as "idle"
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -10
-        player.image = player.sprites.run.image
+        player.switchSprite('run') // whenever we press this key, the run animation gets activated
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 10
-        player.image = player.sprites.run.image
+        player.switchSprite('run')
+    } else {
+        player.switchSprite('idle') // makes the idle and run animations look smooth
     }
-
+    //jumping
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump') // frame for jump image is 2, so we need to make sure the website knows that
+    } else if (player.velocity.y > 0) {
+        player.switchSprite('fall') // fall
+    }
 
     //enemy movement
 

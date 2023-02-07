@@ -101,6 +101,7 @@ class Fighter extends Sprite // moving images in game are called sprite
         // NOTE: this was a update made at 2:05:00, which was cavas.height - 96, this basically makes the players stand on the ground element of your image, this will have to change based on whatvever image you use for the background
         {
             this.velocity.y = 0
+            this.position.y = 330
         } else
             this.velocity.y += gravity //gravity makes sures that the two players are all the way on the floor
     }
@@ -114,4 +115,41 @@ class Fighter extends Sprite // moving images in game are called sprite
 
     }
 
+    switchSprite(sprite) {
+        switch (sprite) {
+            case 'idle':
+                if (this.image !== this.sprites.idle.image) {
+                    this.image = this.sprites.idle.image
+                    this.framesMax = this.sprites.idle.framesMax
+                    this.framesCurrent = 0 // helps when it comes to switching to jump (which has a lower frame rate)
+                }
+                break
+            case 'run':
+                if (this.image !== this.sprites.run.image) {
+                    this.image = this.sprites.run.image
+                    this.framesMax = this.sprites.run.framesMax
+                    this.framesCurrent = 0 // helps when it comes to switching to jump (which has a lower frame rate)
+
+                }
+                break
+            case 'jump':
+                if (this.image != this.sprites.jump.image) {
+                    this.image = this.sprites.jump.image
+                    this.framesMax = this.sprites.jump.framesMax
+                    this.framesCurrent = 0 // helps when it comes to switching to jump (which has a lower frame rate)
+
+                }
+                break
+            case 'fall':
+                if (this.image != this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image
+                    this.framesMax = this.sprites.fall.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+
+
+        }
+
+    }
 }
