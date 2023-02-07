@@ -54,7 +54,7 @@ class Sprite // moving images in game are called sprite
 //This is for the player animation
 class Fighter extends Sprite // moving images in game are called sprite
 {
-    constructor({ position, velocity, color = 'green', imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) // this is the constructor of this class
+    constructor({ position, velocity, color = 'green', imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites }) // this is the constructor of this class
         {
             super({ position, imageSrc, scale, framesMax, offset })
             this.velocity = velocity
@@ -76,6 +76,12 @@ class Fighter extends Sprite // moving images in game are called sprite
             this.framesCurrent = 0
             this.framesElapsed = 0
             this.framesHold = 5
+            this.sprites = sprites
+
+            for (const sprite in this.sprites) {
+                sprites[sprite].image = new Image()
+                sprites[sprite].image.src = sprites[sprite].imageSrc
+            }
         }
 
     update() {
